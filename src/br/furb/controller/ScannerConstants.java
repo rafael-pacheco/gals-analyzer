@@ -1180,16 +1180,15 @@ public interface ScannerConstants
 
     String[] SCANNER_ERROR =
     {
-        "símbolo Inválido",
-        "",
+        "símbolo inválido",
         "telefone inválido",
+        "data inválida",
+        "código de atividade econômica inválido",
+        "CNPJ inválido",
         "data, código de atividade econômica ou CNPJ inválido",
-        "Erro identificando NOME ou EMAIL",
-        "Erro identificando EMAIL",
-        "Erro identificando TELEFONE",
-        "Erro identificando TELEFONE",
-        "Erro identificando CNPJ ou DATA ou ATIVIDADE",
-        "Erro identificando EMAIL",
+        "nome inválido",
+        "email inválido",
+        "nome ou email inválido",
         "Erro identificando EMAIL",
         "Erro identificando EMAIL",
         "",

@@ -44,7 +44,15 @@ public class AnalyzeEntry implements Constants{
                     countEmail++;
                 }
                 
-                System.out.println(token.getLexeme());
+                final StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("dados analisados\n");
+                stringBuilder.append(String.format("CNPJs:\t%d\n", countCnpj));
+                stringBuilder.append(String.format("nomes:\t%d\n", countNome));
+                stringBuilder.append(String.format("telefones:\t%d\n", countTelefone));
+                stringBuilder.append(String.format("datas:\t%d\n", countData));
+                stringBuilder.append(String.format("códigos de atividades:\t%d\n", countAtividade));
+                stringBuilder.append(String.format("emails:\t%d", countEmail));
+                this.setOutput(stringBuilder.toString());
             }
         } catch (LexicalError e) {
             String outputError = (e.getMessage() + "e;, em " + e.getPosition());

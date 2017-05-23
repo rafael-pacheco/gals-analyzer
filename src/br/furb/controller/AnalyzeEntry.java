@@ -55,7 +55,7 @@ public class AnalyzeEntry implements Constants{
                 this.setOutput(stringBuilder.toString());
             }
         } catch (LexicalError e) {
-            String outputError = (e.getMessage() + "e;, em " + e.getPosition());
+            String outputError = ("erro na linha " + e.getPosition() + " - " + e.getMessage() + " : ");
             this.setOutput(outputError);
         }
     }

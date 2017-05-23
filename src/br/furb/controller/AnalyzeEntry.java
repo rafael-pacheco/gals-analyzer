@@ -28,19 +28,19 @@ public class AnalyzeEntry implements Constants{
                 if(token.getId() == t_CNPJ) {
                     countCnpj++;
                 }
-                if(token.getId() == t_NOME) {
+                if(token.getId() == t_Nome) {
                     countNome++;
                 }
-                if(token.getId() == t_TELEFONE) {
+                if(token.getId() == t_Telefone) {
                     countTelefone++;
                 }
-                if(token.getId() == t_DATA) {
+                if(token.getId() == t_Data) {
                     countData++;
                 }
-                if(token.getId() == t_ATIVIDADE) {
+                if(token.getId() == t_Atividade) {
                     countAtividade++;
                 }
-                if(token.getId() == t_EMAIL) {
+                if(token.getId() == t_Email) {
                     countEmail++;
                 }
                 

@@ -6,10 +6,10 @@ public interface Constants extends ScannerConstants
     int DOLLAR   = 1;
 
     int t_CNPJ = 2;
-    int t_NOME = 3;
-    int t_TELEFONE = 4;
-    int t_DATA = 5;
-    int t_ATIVIDADE = 6;
-    int t_EMAIL = 7;
+    int t_Nome = 3;
+    int t_Telefone = 4;
+    int t_Data = 5;
+    int t_Atividade = 6;
+    int t_Email = 7;
 
 }

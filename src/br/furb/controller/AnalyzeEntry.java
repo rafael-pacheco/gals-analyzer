@@ -1,7 +1,5 @@
 package br.furb.controller;
 
-import java.util.Iterator;
-
 public class AnalyzeEntry implements Constants {
 
     private String output = "";
@@ -21,7 +19,6 @@ public class AnalyzeEntry implements Constants {
         int countData = 0;
         int countAtividade = 0;
         int countEmail = 0;
-        int contLinha = 0;
 
         Lexico lexico = new Lexico();
         lexico.setInput(inputContent);
@@ -59,16 +56,27 @@ public class AnalyzeEntry implements Constants {
                 this.setOutput(stringBuilder.toString());
             }
         } catch (LexicalError e) {
-            String texto = inputContent + "";
-            int fimIndex = texto.indexOf(" ", e.getPosition());
-            String palavra = (texto.substring(e.getPosition(), fimIndex));
+            String texto = inputContent + " ";
+            String palavra = "";
+
+            int fimIndexEspaco = texto.indexOf(" ", e.getPosition());
+            int fimIndexQuebra = texto.indexOf("\n", e.getPosition());
+
+            if (fimIndexEspaco > fimIndexQuebra) {
+                palavra = (texto.substring(e.getPosition(), fimIndexQuebra));
+            } else {
+                palavra = (texto.substring(e.getPosition(), fimIndexEspaco));
+            }
+
             String[] linha = texto.split("\n");
+            int contLinha = 0;
             for (int i = 0; i <= linha.length; i++) {
                 if (linha[i].contains(palavra)) {
                     contLinha = i;
                     break;
                 }
             }
+
             String outputError = ("erro na linha " + (contLinha + 1) + " - " + e.getMessage() + " : " + palavra);
             this.setOutput(outputError);
         }

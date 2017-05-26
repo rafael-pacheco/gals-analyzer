@@ -1,6 +1,8 @@
 package br.furb.controller;
 
-public class AnalyzeEntry implements Constants{
+import java.util.Iterator;
+
+public class AnalyzeEntry implements Constants {
 
     private String output = "";
 
@@ -19,31 +21,33 @@ public class AnalyzeEntry implements Constants{
         int countData = 0;
         int countAtividade = 0;
         int countEmail = 0;
-        
+        int contLinha = 0;
+
         Lexico lexico = new Lexico();
         lexico.setInput(inputContent);
+        Token token = null;
+
         try {
-            Token token = null;
             while ((token = lexico.nextToken()) != null) {
-                if(token.getId() == t_CNPJ) {
+                if (token.getId() == t_CNPJ) {
                     countCnpj++;
                 }
-                if(token.getId() == t_Nome) {
+                if (token.getId() == t_Nome) {
                     countNome++;
                 }
-                if(token.getId() == t_Telefone) {
+                if (token.getId() == t_Telefone) {
                     countTelefone++;
                 }
-                if(token.getId() == t_Data) {
+                if (token.getId() == t_Data) {
                     countData++;
                 }
-                if(token.getId() == t_Atividade) {
+                if (token.getId() == t_Atividade) {
                     countAtividade++;
                 }
-                if(token.getId() == t_Email) {
+                if (token.getId() == t_Email) {
                     countEmail++;
                 }
-                
+
                 final StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("dados analisados\n");
                 stringBuilder.append(String.format("CNPJs:\t%d\n", countCnpj));
@@ -55,7 +59,17 @@ public class AnalyzeEntry implements Constants{
                 this.setOutput(stringBuilder.toString());
             }
         } catch (LexicalError e) {
-            String outputError = ("erro na linha " + e.getPosition() + " - " + e.getMessage() + " : ");
+            String texto = inputContent + "";
+            int fimIndex = texto.indexOf(" ", e.getPosition());
+            String palavra = (texto.substring(e.getPosition(), fimIndex));
+            String[] linha = texto.split("\n");
+            for (int i = 0; i <= linha.length; i++) {
+                if (linha[i].contains(palavra)) {
+                    contLinha = i;
+                    break;
+                }
+            }
+            String outputError = ("erro na linha " + (contLinha + 1) + " - " + e.getMessage() + " : " + palavra);
             this.setOutput(outputError);
         }
     }

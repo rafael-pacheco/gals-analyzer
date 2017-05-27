@@ -8,7 +8,7 @@ public class AnalyzeEntry implements Constants {
         return output;
     }
 
-    public void setOutput(String output) {
+    public void setOutput(final String output) {
         this.output = output;
     }
 
@@ -22,9 +22,9 @@ public class AnalyzeEntry implements Constants {
 
         Lexico lexico = new Lexico();
         lexico.setInput(inputContent);
-        Token token = null;
 
         try {
+            Token token = null;
             while ((token = lexico.nextToken()) != null) {
                 if (token.getId() == t_CNPJ) {
                     countCnpj++;
@@ -56,29 +56,28 @@ public class AnalyzeEntry implements Constants {
                 this.setOutput(stringBuilder.toString());
             }
         } catch (LexicalError e) {
-            String texto = inputContent + " ";
-            String palavra = "";
+            final String input = inputContent + " ";
+            String token = "";
 
-            int fimIndexEspaco = texto.indexOf(" ", e.getPosition());
-            int fimIndexQuebra = texto.indexOf("\n", e.getPosition());
+            final int endIndexSpace = input.indexOf(" ", e.getPosition());
+            final int endIndexBreak = input.indexOf("\n", e.getPosition());
 
-            if (fimIndexEspaco > fimIndexQuebra) {
-                palavra = (texto.substring(e.getPosition(), fimIndexQuebra));
+            if (endIndexSpace > endIndexBreak) {
+                token = (input.substring(e.getPosition(), endIndexBreak));
             } else {
-                palavra = (texto.substring(e.getPosition(), fimIndexEspaco));
+                token = (input.substring(e.getPosition(), endIndexSpace));
             }
 
-            String[] linha = texto.split("\n");
-            int contLinha = 0;
-            for (int i = 0; i <= linha.length; i++) {
-                if (linha[i].contains(palavra)) {
-                    contLinha = i;
+            final String[] lines = input.split("\n");
+            int countLines = 0;
+            for (int i = 0; i <= lines.length; i++) {
+                if (lines[i].contains(token)) {
+                    countLines = i;
                     break;
                 }
             }
 
-            String outputError = ("erro na linha " + (contLinha + 1) + " - " + e.getMessage() + " : " + palavra);
-            this.setOutput(outputError);
+            this.setOutput("erro na linha " + (countLines + 1) + " - " + e.getMessage() + " : " + token);
         }
     }
 
